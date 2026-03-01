@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akshat Gupta | AI Product Manager</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f1a;
+      --bg3: #13131f;
+      --card: #141420;
+      --border: #1e1e2e;
+      --cyan: #00e5ff;
+      --purple: #a855f7;
+      --pink: #f472b6;
+      --green: #22d3ee;
+      --amber: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--cyan); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+    .hero-glow-1 {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
+      top: -150px; left: -150px; pointer-events: none;
+      animation: float1 8s ease-in-out infinite;
+    }
+    .hero-glow-2 {
+      position: absolute; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 70%);
+      bottom: -200px; right: -200px; pointer-events: none;
+      animation: float2 10s ease-in-out infinite;
+    }
+    @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,30px)} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-40px)} }
+
+    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 820px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2);
+      color: var(--cyan); font-size: 0.8rem; padding: 0.4rem 1rem;
+      border-radius: 999px; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 40%, var(--purple) 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem; animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--muted);
+      margin-bottom: 1.5rem; animation: fadeUp 0.6s ease 0.2s both;
+      min-height: 2rem;
+    }
+    #typewriter { color: var(--cyan); border-right: 2px solid var(--cyan); animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{border-color:var(--cyan)} 50%{border-color:transparent} }
+
+    .hero-bio {
+      font-size: 1.05rem; color: #94a3b8; max-width: 660px;
+      margin: 0 auto 2rem; line-height: 1.75;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+      margin-bottom: 2.5rem; animation: fadeUp 0.6s ease 0.35s both;
+    }
+    .hero-pill {
+      font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #94a3b8;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+    .btn-primary {
+      padding: 0.75rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #000; border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(0,229,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(0,229,255,0.5); }
+    .btn-outline {
+      padding: 0.75rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      background: transparent; color: var(--text); border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ─── COMMONS ────────────────────────────────────────────── */
+    .section-wrap { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; color: var(--text); margin-bottom: 1rem;
+    }
+    .section-title span {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-desc { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 620px; margin-bottom: 3rem; }
+    .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+    /* ─── ABOUT ─────────────────────────────────────────────── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem; transition: border-color 0.3s;
+    }
+    .stat-card:hover { border-color: var(--cyan); }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .award-strip { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+    .award-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15);
+      border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; color: #cbd5e1;
+    }
+    .award-icon { font-size: 1rem; }
+
+    .about-visual { display: flex; align-items: center; justify-content: center; }
+    .avatar-ring {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: conic-gradient(var(--cyan), var(--purple), var(--pink), var(--cyan));
+      padding: 3px; animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%; background: var(--bg2);
+      display: flex; align-items: center; justify-content: center; font-size: 5rem;
+    }
+
+    /* ─── PROJECTS ──────────────────────────────────────────── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(0,229,255,0.25); box-shadow: 0 20px 40px rgba(0,229,255,0.06); }
+    .project-card:hover::before { opacity: 1; }
+
+    .project-emoji { font-size: 2rem; margin-bottom: 0.85rem; }
+    .project-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .tag {
+      font-size: 0.7rem; font-weight: 600; padding: 0.22rem 0.6rem;
+      border-radius: 6px; letter-spacing: 0.4px;
+    }
+    .tag-cyan   { background: rgba(0,229,255,0.1);   color: var(--cyan);   border: 1px solid rgba(0,229,255,0.2); }
+    .tag-purple { background: rgba(168,85,247,0.1);  color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+    .tag-pink   { background: rgba(244,114,182,0.1); color: var(--pink);   border: 1px solid rgba(244,114,182,0.2); }
+    .tag-green  { background: rgba(34,211,238,0.1);  color: var(--green);  border: 1px solid rgba(34,211,238,0.2); }
+    .tag-amber  { background: rgba(251,191,36,0.1);  color: var(--amber);  border: 1px solid rgba(251,191,36,0.2); }
+
+    .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; flex: 1; }
+
+    .impact-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .impact-pill {
+      font-size: 0.72rem; padding: 0.22rem 0.6rem;
+      background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 6px; color: var(--cyan); font-weight: 600;
+    }
+
+    .project-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto;
+    }
+    .tech-stack { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tech-pill {
+      font-size: 0.68rem; padding: 0.18rem 0.5rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 4px; color: #94a3b8;
+    }
+    .project-link {
+      color: var(--cyan); font-size: 0.8rem; text-decoration: none;
+      display: flex; align-items: center; gap: 0.3rem; white-space: nowrap;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.6rem; }
+
+    /* ─── SKILLS ────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem;
+    }
+    .skill-group {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.4rem; transition: border-color 0.3s;
+    }
+    .skill-group:hover { border-color: var(--purple); }
+    .skill-group-title {
+      font-size: 0.82rem; font-weight: 700; color: var(--purple);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.9rem;
+    }
+    .skill-items { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .skill-item {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.35rem 0.7rem;
+      font-size: 0.78rem; color: var(--text); transition: background 0.2s, border-color 0.2s;
+    }
+    .skill-item:hover { background: rgba(168,85,247,0.1); border-color: var(--purple); }
+
+    /* ─── TIMELINE ──────────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--cyan), var(--purple), transparent);
+    }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.43rem; top: 0.35rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--cyan); border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(0,229,255,0.6);
+    }
+    .tl-period { font-size: 0.75rem; color: var(--cyan); font-weight: 600; margin-bottom: 0.2rem; letter-spacing: 0.5px; }
+    .tl-role { font-size: 1rem; font-weight: 700; }
+    .tl-company { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .tl-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.65; }
+
+    /* ─── CONTACT ───────────────────────────────────────────── */
+    .contact-box {
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,0.06) 0%, transparent 70%);
+      border: 1px solid var(--border); border-radius: 24px;
+      padding: 5rem 2rem; margin-bottom: 4rem;
+    }
+    .contact-box .section-label, .contact-box .section-title, .contact-box .section-desc {
+      margin-left: auto; margin-right: auto;
+    }
+    .contact-box .section-desc { margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-card {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.9rem 1.5rem;
+      text-decoration: none; color: var(--text); font-size: 0.9rem;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s, color 0.2s;
+    }
+    .contact-card:hover { border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,229,255,0.1); color: var(--cyan); }
+    .contact-icon { font-size: 1.2rem; }
+
+    /* ─── PAPER CALLOUT ─────────────────────────────────────── */
+    .paper-callout {
+      background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      margin-top: 2rem; font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;
+    }
+    .paper-callout a { color: var(--purple); text-decoration: none; }
+    .paper-callout a:hover { text-decoration: underline; }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+    footer span { background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .avatar-ring { width: 180px; height: 180px; }
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Akshat Gupta.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      Open to AI PM &amp; Product opportunities
+    </div>
+    <h1 class="hero-name">Akshat Gupta</h1>
+    <p class="hero-title"><span id="typewriter"></span></p>
+    <p class="hero-bio">
+      6 years building data-driven products across ML, GenAI, healthtech, and social platforms. I bridge the gap between complex AI systems and real business outcomes — from fine-tuning multimodal LLMs to shipping RecSys at scale.
+    </p>
+    <div class="hero-pills">
+      <span class="hero-pill">📍 Gurugram, India</span>
+      <span class="hero-pill">🎓 IIT (BHU) Varanasi</span>
+      <span class="hero-pill">📄 SIGIR'23 Publication</span>
+      <span class="hero-pill">🏥 Tata 1mg · ShareChat · Acko</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">See My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">AI-native PM who <span>ships things</span></h2>
+      <p>I'm a product manager with hands-on depth in ML systems. I've led the end-to-end development of a multimodal GenAI clinical data extraction system, shipped XGBoost-based churn models that got published at SIGIR, and built search & recommendation products at 150M+ user scale.</p>
+      <p>My edge: I can go deep into model evaluation, write the SQL myself, and still zoom out to board-level strategy — bridging tech and business in both directions.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">₹45Cr+</div>
+          <div class="stat-label">New Business Unlocked</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">150k</div>
+          <div class="stat-label">DAUs Impacted (RecSys)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">SIGIR'23 Publication</div>
+        </div>
+      </div>
+
+      <div class="award-strip">
+        <div class="award-item"><span class="award-icon">🏆</span> "Ownership Champ" — Tata 1mg</div>
+        <div class="award-item"><span class="award-icon">🏆</span> "Game Changer" &amp; "Ace of Initiative" — ShareChat (Director of Product)</div>
+        <div class="award-item"><span class="award-icon">📜</span> IBM AI Product Manager Professional Certificate</div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="avatar-ring">
+        <div class="avatar-inner">👨‍💻</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects">
+  <div class="reveal">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <p class="section-desc">Real work — from GenAI systems to ML-powered products, shipped at scale across healthtech, social media, and e-commerce.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1: InCurate -->
+    <div class="project-card reveal">
+      <div class="project-emoji">🧬</div>
+      <div class="project-meta">
+        <span class="tag tag-purple">GenAI</span>
+        <span class="tag tag-cyan">Multimodal LLMs</span>
+        <span class="tag tag-pink">Healthtech</span>
+      </div>
+      <h3 class="project-title">InCurate — Clinical Data Extraction (Tata 1mg)</h3>
+      <p class="project-desc">Led development of a GenAI-powered system that converts unstructured diagnostic reports into structured health-risk insights using multimodal LLMs. Designed the PM strategy, model selection framework, and rollout across corporate wellness clients.</p>
+      <div class="impact-row">
+        <span class="impact-pill">+23% health-risk scoring accuracy</span>
+        <span class="impact-pill">Multimodal LLM pipeline</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">Gemini 1.5 Pro</span>
+          <span class="tech-pill">LLaVA</span>
+          <span class="tech-pill">Donut</span>
+          <span class="tech-pill">Claude</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2: OPD -->
+    <div class="project-card reveal">
+      <div class="project-emoji">🏥</div>
+      <div class="project-meta">
+        <span class="tag tag-green">GenAI-Assisted</span>
+        <span class="tag tag-cyan">B2B2C</span>
+        <span class="tag tag-amber">Healthtech</span>
+      </div>
+      <h3 class="project-title">Cashless OPD Product Suite (Tata 1mg)</h3>
+      <p class="project-desc">Built India's first truly integrated corporate OPD product covering pharmacy, diagnostics, consults, dental, mental wellness, gym, and more — with a unified multi-wallet system and hybrid cashless + reimbursement architecture. Used GenAI to accelerate PRDs, wireframes, and client workflows by 50%.</p>
+      <div class="impact-row">
+        <span class="impact-pill">₹32Cr ARR</span>
+        <span class="impact-pill">₹200Cr+ pipeline</span>
+        <span class="impact-pill">12,000+ employees</span>
+        <span class="impact-pill">50% faster delivery</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">LangChain</span>
+          <span class="tech-pill">Google AI Studio</span>
+          <span class="tech-pill">Loveable AI</span>
+          <span class="tech-pill">Notion AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3: User Fatigue Model -->
+    <div class="project-card reveal">
+      <div class="project-emoji">📊</div>
+      <div class="project-meta">
+        <span class="tag tag-purple">ML</span>
+        <span class="tag tag-cyan">Ad-Tech</span>
+        <span class="tag tag-amber">SIGIR'23</span>
+      </div>
+      <h3 class="project-title">User Fatigue Model — Ad Load Optimisation (ShareChat)</h3>
+      <p class="project-desc">Designed and shipped an XGBoost model predicting churn probability from ad-load exposure, enabling dynamic per-user ad frequency on the Landing Feed. Drove feature engineering, dataset creation, and A/B test analysis. Research published at SIGIR'23.</p>
+      <div class="impact-row">
+        <span class="impact-pill">+0.15% retention</span>
+        <span class="impact-pill">₹150k/month revenue</span>
+        <span class="impact-pill">SIGIR'23 published</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">XGBoost</span>
+          <span class="tech-pill">MLP</span>
+          <span class="tech-pill">Logistic Regression</span>
+          <span class="tech-pill">A/B Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4: Contextual Bandits -->
+    <div class="project-card reveal">
+      <div class="project-emoji">🎰</div>
+      <div class="project-meta">
+        <span class="tag tag-purple">Reinforcement Learning</span>
+        <span class="tag tag-cyan">Ad-Tech</span>
+      </div>
+      <h3 class="project-title">Contextual Bandit Ad Policy (ShareChat)</h3>
+      <p class="project-desc">Designed a Contextual Bandit framework for personalised ad-load decisions, replacing rule-based policies. Modelled ad slots as arms with a multi-objective reward balancing user satisfaction and revenue. Used IPW &amp; Doubly Robust estimators for offline evaluation. Shipped Neural Net model to 1% production traffic.</p>
+      <div class="impact-row">
+        <span class="impact-pill">₹2M/month incremental revenue</span>
+        <span class="impact-pill">Retention neutral+</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">Contextual Bandits</span>
+          <span class="tech-pill">Neural Networks</span>
+          <span class="tech-pill">IPW / DR estimators</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5: RecSys -->
+    <div class="project-card reveal">
+      <div class="project-emoji">🔁</div>
+      <div class="project-meta">
+        <span class="tag tag-green">Recommendation</span>
+        <span class="tag tag-cyan">ML</span>
+        <span class="tag tag-purple">Social</span>
+      </div>
+      <h3 class="project-title">RecSys Revamp &amp; Candidate Generator (ShareChat)</h3>
+      <p class="project-desc">Fixed training data biases in ShareChat's content recall pipeline and redesigned candidate selection using post lifecycle and embedding maturity. Built a post-post cosine similarity candidate generator (ANN-based) that replaced a costly in-session personalisation layer.</p>
+      <div class="impact-row">
+        <span class="impact-pill">+2% model AUC</span>
+        <span class="impact-pill">+0.4% retention (150k DAUs)</span>
+        <span class="impact-pill">₹8M/month cost saved</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">Cosine Similarity</span>
+          <span class="tech-pill">ANN Index</span>
+          <span class="tech-pill">NDCG / Recall</span>
+          <span class="tech-pill">Embeddings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6: Search -->
+    <div class="project-card reveal">
+      <div class="project-emoji">🔍</div>
+      <div class="project-meta">
+        <span class="tag tag-cyan">Search</span>
+        <span class="tag tag-purple">NLP</span>
+        <span class="tag tag-green">Ranking</span>
+      </div>
+      <h3 class="project-title">Search Relevance &amp; 2-Stage Ranking (ShareChat)</h3>
+      <p class="project-desc">Migrated ShareChat's search from exact token matching to n-gram retrieval in Elasticsearch, then designed a 2-stage ranking pipeline with counter-based and engagement-aware rankers optimised for MRR. Also built a centralised Search-as-a-Service platform across all verticals.</p>
+      <div class="impact-row">
+        <span class="impact-pill">+16% interacted searches</span>
+        <span class="impact-pill">+20s avg time spent</span>
+        <span class="impact-pill">MRR +45%</span>
+      </div>
+      <div class="project-footer">
+        <div class="tech-stack">
+          <span class="tech-pill">Elasticsearch</span>
+          <span class="tech-pill">n-gram</span>
+          <span class="tech-pill">MRR optimisation</span>
+          <span class="tech-pill">2-stage ranking</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="paper-callout reveal">
+    <span>📄</span>
+    <div>
+      <strong>SIGIR'23 Publication:</strong>
+      <a href="https://drive.google.com/file/d/1Zfb1HBNCHKvVMsVNem_zuTS6LKJSh7-7/view?usp=sharing" target="_blank">
+        "Quantifying and Leveraging User Fatigue for Interventions in Recommender Systems"
+      </a>
+      — Co-authored research on the user fatigue model, presented at the ACM SIGIR 2023 conference.
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<div class="section-wrap" id="skills">
+  <div class="reveal">
+    <p class="section-label">Toolkit</p>
+    <h2 class="section-title">Skills &amp; <span>Tech Stack</span></h2>
+    <p class="section-desc">What I actually use — from ML model evaluation to GenAI tools, SQL deep-dives to product strategy.</p>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">🤖 GenAI &amp; LLM Tools</div>
+      <div class="skill-items">
+        <div class="skill-item">LangChain</div>
+        <div class="skill-item">Google AI Studio</div>
+        <div class="skill-item">Claude API</div>
+        <div class="skill-item">ChatGPT / OpenAI</div>
+        <div class="skill-item">NotebookLM</div>
+        <div class="skill-item">Loveable AI</div>
+        <div class="skill-item">Galileo AI</div>
+        <div class="skill-item">Notion AI</div>
+      </div>
+    </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">🧠 ML &amp; AI Systems</div>
+      <div class="skill-items">
+        <div class="skill-item">XGBoost</div>
+        <div class="skill-item">Multimodal LLMs</div>
+        <div class="skill-item">Recommendation Systems</div>
+        <div class="skill-item">Contextual Bandits</div>
+        <div class="skill-item">Embeddings / ANN</div>
+        <div class="skill-item">Search Ranking (MRR)</div>
+        <div class="skill-item">A/B Testing</div>
+      </div>
+    </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">📊 Data &amp; Analytics</div>
+      <div class="skill-items">
+        <div class="skill-item">SQL (Advanced)</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">Excel (Advanced)</div>
+        <div class="skill-item">Tableau</div>
+        <div class="skill-item">Google Analytics</div>
+        <div class="skill-item">Mixpanel</div>
+        <div class="skill-item">Eppo</div>
+        <div class="skill-item">Firebase</div>
+      </div>
+    </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">📦 Product Management</div>
+      <div class="skill-items">
+        <div class="skill-item">Product Strategy</div>
+        <div class="skill-item">Roadmapping</div>
+        <div class="skill-item">GTM Strategy</div>
+        <div class="skill-item">Stakeholder Mgmt</div>
+        <div class="skill-item">Prioritisation</div>
+        <div class="skill-item">RCA</div>
+        <div class="skill-item">System Design</div>
+      </div>
+    </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">🛠️ Tools &amp; Platforms</div>
+      <div class="skill-items">
+        <div class="skill-item">Jira</div>
+        <div class="skill-item">Confluence</div>
+        <div class="skill-item">Notion</div>
+        <div class="skill-item">Figma / Uizard</div>
+        <div class="skill-item">GitHub</div>
+        <div class="skill-item">Elasticsearch</div>
+      </div>
+    </div>
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">🏢 Domains</div>
+      <div class="skill-items">
+        <div class="skill-item">Healthtech (B2B2C)</div>
+        <div class="skill-item">Social Media (150M+ users)</div>
+        <div class="skill-item">Ad-Tech</div>
+        <div class="skill-item">E-commerce</div>
+        <div class="skill-item">Insurance Analytics</div>
+        <div class="skill-item">SaaS</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE TIMELINE -->
+<div class="section-wrap" id="experience">
+  <div class="reveal">
+    <p class="section-label">Career</p>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <p class="section-desc">6 years across analytics, ML product management, and AI-native product development.</p>
+  </div>
+
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="tl-period">June 2024 – Present</div>
+      <div class="tl-role">Product Manager II</div>
+      <div class="tl-company">Tata 1mg · Gurugram, Haryana</div>
+      <p class="tl-desc">Leading the Corporate Health &amp; Wellness (B2B2C) charter. Shipped InCurate (GenAI clinical data extraction), the Cashless OPD Suite, and corporate e-pharmacy integration — unlocking ₹45Cr+ in new business. Used GenAI tools end-to-end to cut product turnaround by 50%.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Sept 2021 – Jan 2024</div>
+      <div class="tl-role">Associate Product Manager <span style="color:var(--muted);font-weight:400">(Promoted from Senior Product Analyst)</span></div>
+      <div class="tl-company">ShareChat · Bengaluru, Karnataka</div>
+      <p class="tl-desc">Owned ML product strategy across recommendations, ad-tech, and search for a 150M+ user platform. Shipped XGBoost fatigue model (SIGIR'23), contextual bandit ad policies, and the platform-wide Search-as-a-Service. Led cross-functional teams across MLE, SDE, and analysts.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Dec 2020 – Aug 2021</div>
+      <div class="tl-role">Data Analyst</div>
+      <div class="tl-company">Acko Insurance · Bengaluru, Karnataka</div>
+      <p class="tl-desc">Owned growth and marketing analytics. Automated 10+ agency reports (saving 4+ hrs/day), identified demand estimation errors with a 12% gap, and optimised drip marketing windows adding 3k leads/day.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">July 2019 – Nov 2020</div>
+      <div class="tl-role">Product Analyst</div>
+      <div class="tl-company">Zilingo · Bengaluru, Karnataka</div>
+      <p class="tl-desc">Led analytics across B2B and SaaS products. Built the SaaS services dashboard (CTO-apprised), reduced delivery-fee checkout drop-offs by 15%, and improved B2B cart conversion by +12% via cohort-based retargeting.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="section-wrap">
+  <div class="contact-box reveal" id="contact">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title">Open to <span>AI PM Roles</span></h2>
+    <p class="section-desc">I'm actively looking for AI/ML Product Manager roles where I can combine deep technical fluency with product impact. Let's talk.</p>
+    <div class="contact-links">
+      <a href="mailto:gakshat22@gmail.com" class="contact-card">
+        <span class="contact-icon">✉️</span> gakshat22@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/gakshat22" target="_blank" class="contact-card">
+        <span class="contact-icon">💼</span> LinkedIn
+      </a>
+      <a href="https://github.com/gakshat22" target="_blank" class="contact-card">
+        <span class="contact-icon">🐙</span> GitHub
+      </a>
+      <a href="https://drive.google.com/file/d/1Zfb1HBNCHKvVMsVNem_zuTS6LKJSh7-7/view?usp=sharing" target="_blank" class="contact-card">
+        <span class="contact-icon">📄</span> SIGIR'23 Paper
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <span>Akshat Gupta</span> · 2026</p>
+</footer>
+
+<script>
+  // Typewriter
+  const phrases = [
+    'AI Product Manager',
+    'ML Systems Thinker',
+    'GenAI Builder',
+    'Data-Driven PM',
+    'RecSys & Search PM',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typewriter');
+
+  function type() {
+    const current = phrases[pi];
+    if (!deleting) {
+      el.textContent = current.slice(0, ci + 1);
+      ci++;
+      if (ci === current.length) { deleting = true; setTimeout(type, 2000); return; }
+    } else {
+      el.textContent = current.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 55 : 85);
+  }
+  type();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
