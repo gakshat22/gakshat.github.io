@@ -418,6 +418,63 @@
     }
     .purple-arrow .arrow-head { border-left-color: var(--purple); }
 
+    /* ─── EMAIL CAPTURE ─────────────────────────────────────── */
+    .email-capture-wrap {
+      margin: 2rem auto 2.5rem;
+      max-width: 520px;
+    }
+    .email-capture-label {
+      font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem; line-height: 1.6;
+    }
+    .email-capture-label strong { color: var(--cyan); }
+    .email-capture-row {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .email-input {
+      flex: 1; min-width: 200px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.75rem 1rem;
+      color: var(--text); font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .email-input::placeholder { color: var(--muted); }
+    .email-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+    }
+    .email-send-btn {
+      padding: 0.75rem 1.5rem; border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #000; font-weight: 700; font-size: 0.88rem;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 16px rgba(0,229,255,0.25);
+    }
+    .email-send-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 0 24px rgba(0,229,255,0.4); }
+    .email-send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .email-status {
+      margin-top: 0.75rem; font-size: 0.82rem; min-height: 1.2rem;
+      border-radius: 8px; padding: 0.5rem 0.75rem;
+      display: none;
+    }
+    .email-status.success {
+      display: block;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #86efac;
+    }
+    .email-status.error {
+      display: block;
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #fca5a5;
+    }
+    .email-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 1.75rem auto; max-width: 520px; color: var(--muted); font-size: 0.8rem;
+    }
+    .email-divider::before, .email-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
     /* ─── RESPONSIVE ────────────────────────────────────────── */
     @media (max-width: 768px) {
       .about-grid { grid-template-columns: 1fr; }
@@ -449,12 +506,12 @@
   <div class="hero-content">
     <div class="hero-badge">
       <div class="dot"></div>
-      Open to AI PM &amp; Product opportunities
+      Open to Product Management opportunities
     </div>
     <h1 class="hero-name">Akshat Gupta</h1>
     <p class="hero-title"><span id="typewriter"></span></p>
     <p class="hero-bio">
-      7 years building AI-powered products across healthtech, social media, and e-commerce. I bridge the gap between complex ML systems and real business outcomes — combining GenAI fluency, UI/UX instincts, and cross-functional ownership to ship things that matter.
+      7 years turning messy, ambiguous problems into products that drive real business outcomes. I lead with user empathy and sharp problem framing — then bring in the right mix of data, technology, and AI to build the smartest solution, not just the most complex one.
     </p>
     <div class="hero-pills">
       <span class="hero-pill">📍 Gurugram, India</span>
@@ -476,9 +533,9 @@
   <div class="about-grid">
     <div class="about-text reveal">
       <p class="section-label">About Me</p>
-      <h2 class="section-title">AI-native PM who <span>ships things</span></h2>
-      <p>I'm an AI-native PM who's equally comfortable in a model eval meeting and a C-suite boardroom. I've shipped multimodal GenAI systems, ML-powered RecSys, and data-driven ad-tech — while personally owning strategy, design, and stakeholder alignment end-to-end across every project.</p>
-      <p>Beyond the technical depth, I bring full-stack product thinking: user research, UI/UX wireframing with modern AI design tools, growth experimentation, and crisp cross-functional communication. I don't just spec features — I build conviction across engineering, business, and leadership to make the right things happen.</p>
+      <h2 class="section-title">PM who <span>solves hard problems</span> and ships</h2>
+      <p>I'm a generalist PM at heart — I obsess over understanding users, cutting through noise to find the problems worth solving, and then doing whatever it takes to ship the right solution. That's meant leading user research, redesigning broken workflows, building 0→1 products, and optimising ML systems at 150M+ user scale.</p>
+      <p>Tech and AI are core parts of how I work — not a constraint or a specialty. I use them to make better decisions faster, build smarter products, and accelerate execution. But they sit alongside strong people skills, high ownership, stakeholder management, and the ability to lead cross-functional teams from ambiguity to impact.</p>
 
       <div class="stats-grid">
         <div class="stat-card">
@@ -1028,8 +1085,23 @@
 <div class="section-wrap">
   <div class="contact-box reveal" id="contact">
     <p class="section-label">Let's Connect</p>
-    <h2 class="section-title">Open to <span>AI PM Roles</span></h2>
-    <p class="section-desc">I'm actively looking for AI/ML Product Manager roles where I can combine deep technical fluency with product impact. Let's talk.</p>
+    <h2 class="section-title">Open to <span>PM Opportunities</span></h2>
+    <p class="section-desc">I'm actively looking for product management roles — consumer, B2B, growth, or AI-enabled. If you think there's a fit, I'd love to hear from you.</p>
+
+    <!-- EMAIL CAPTURE -->
+    <div class="email-capture-wrap">
+      <p class="email-capture-label">
+        📬 <strong>Get my resume directly in your inbox</strong> — drop your email below and I'll send it over instantly, along with a short intro.
+      </p>
+      <div class="email-capture-row">
+        <input type="email" id="recruiter-email" class="email-input" placeholder="your@company.com" />
+        <button class="email-send-btn" id="send-btn" onclick="sendResume()">Send me his resume →</button>
+      </div>
+      <div class="email-status" id="email-status"></div>
+    </div>
+
+    <div class="email-divider">or reach out directly</div>
+
     <div class="contact-links">
       <a href="mailto:gakshat22@gmail.com" class="contact-card">
         <span class="contact-icon">✉️</span> gakshat22@gmail.com
@@ -1047,14 +1119,70 @@
   </div>
 </div>
 
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <!-- FOOTER -->
 <footer>
   <p>Designed &amp; built by <span>Akshat Gupta</span> · 2026</p>
 </footer>
 
 <script>
+  /* ── EMAILJS SETUP ──────────────────────────────────────── */
+  // ⚠️ Replace these three values after setting up EmailJS (see setup guide)
+  const EMAILJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';
+  const EMAILJS_SERVICE_ID   = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID  = 'YOUR_TEMPLATE_ID';
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  function sendResume() {
+    const emailEl  = document.getElementById('recruiter-email');
+    const btn      = document.getElementById('send-btn');
+    const statusEl = document.getElementById('email-status');
+    const email    = emailEl.value.trim();
+
+    // Basic validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      statusEl.className = 'email-status error';
+      statusEl.textContent = '⚠️ Please enter a valid email address.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    statusEl.className = 'email-status';
+    statusEl.textContent = '';
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:    email,
+      resume_link: 'https://gakshat.github.io/resume.pdf',
+    })
+    .then(() => {
+      statusEl.className = 'email-status success';
+      statusEl.textContent = '✅ Resume sent! Check your inbox (and spam just in case).';
+      btn.textContent = '✓ Sent!';
+      emailEl.value = '';
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send me his resume →';
+      }, 4000);
+    })
+    .catch(() => {
+      statusEl.className = 'email-status error';
+      statusEl.textContent = '❌ Something went wrong. Please email me directly at gakshat22@gmail.com';
+      btn.disabled = false;
+      btn.textContent = 'Send me his resume →';
+    });
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('recruiter-email').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sendResume();
+  });
+
   /* ── TYPEWRITER ─────────────────────────────────────────── */
-  const phrases = ['AI Product Manager','ML Systems Thinker','GenAI Builder','Data-Driven PM','RecSys & Search PM'];
+  const phrases = ['Product Manager','Problem Solver','User Advocate','Strategic PM','AI-Enabled Builder'];
   let pi = 0, ci = 0, deleting = false;
   const twEl = document.getElementById('typewriter');
   function type() {
