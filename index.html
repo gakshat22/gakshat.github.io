@@ -336,6 +336,88 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ─── PIPELINE SECTION ──────────────────────────────────── */
+    .pipeline-section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .pipeline-wrap {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .pipeline-header { margin-bottom: 2rem; }
+    .pipeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .pipeline-subtitle { font-size: 0.82rem; color: var(--muted); }
+
+    .pipeline-flow {
+      display: flex; align-items: flex-start; gap: 0;
+      overflow-x: auto; padding-bottom: 0.5rem;
+    }
+    .pipeline-flow::-webkit-scrollbar { height: 4px; }
+    .pipeline-flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .pipeline-step {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; min-width: 130px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .pipeline-step.lit { opacity: 1; transform: translateY(0); }
+
+    .step-box {
+      width: 100%; max-width: 130px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1rem 0.75rem; text-align: center;
+      transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;
+    }
+    .pipeline-step.lit .step-box {
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 0 18px rgba(0,229,255,0.12);
+      background: rgba(0,229,255,0.04);
+    }
+    .pipeline-step.lit.purple-pipe .step-box {
+      border-color: rgba(168,85,247,0.4);
+      box-shadow: 0 0 18px rgba(168,85,247,0.12);
+      background: rgba(168,85,247,0.04);
+    }
+    .step-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .step-name { font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; line-height: 1.3; }
+    .step-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.4; }
+
+    .step-result {
+      margin-top: 0.6rem; font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.5rem; border-radius: 6px;
+      background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.2);
+      opacity: 0; transition: opacity 0.4s 0.3s;
+    }
+    .purple-pipe .step-result { background: rgba(168,85,247,0.1); color: var(--purple); border-color: rgba(168,85,247,0.2); }
+    .pipeline-step.lit .step-result { opacity: 1; }
+
+    .pipeline-arrow {
+      display: flex; align-items: center; padding: 0 0.2rem;
+      padding-top: 1.4rem; flex-shrink: 0;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .pipeline-arrow.lit { opacity: 1; }
+    .arrow-line {
+      width: 24px; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), rgba(0,229,255,0.3));
+      position: relative; overflow: hidden;
+    }
+    .purple-arrow .arrow-line { background: linear-gradient(90deg, var(--purple), rgba(168,85,247,0.3)); }
+    .arrow-line::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: flow 1.8s linear infinite;
+    }
+    @keyframes flow { to { left: 200%; } }
+    .arrow-head {
+      width: 0; height: 0;
+      border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+      border-left: 7px solid var(--cyan);
+    }
+    .purple-arrow .arrow-head { border-left-color: var(--purple); }
+
     /* ─── RESPONSIVE ────────────────────────────────────────── */
     @media (max-width: 768px) {
       .about-grid { grid-template-columns: 1fr; }
@@ -353,6 +435,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -399,19 +482,19 @@
 
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-num">6</div>
+          <div class="stat-num" data-target="6" data-suffix=" yrs">0</div>
           <div class="stat-label">Years of Experience</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">₹45Cr+</div>
+          <div class="stat-num" data-target="45" data-prefix="₹" data-suffix="Cr+">0</div>
           <div class="stat-label">New Business Unlocked</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">150k</div>
-          <div class="stat-label">DAUs Impacted (RecSys)</div>
+          <div class="stat-num" data-target="150" data-suffix="k DAUs">0</div>
+          <div class="stat-label">RecSys Retention Impact</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">1</div>
+          <div class="stat-num" data-target="1" data-suffix=" paper">0</div>
           <div class="stat-label">SIGIR'23 Publication</div>
         </div>
       </div>
@@ -605,6 +688,206 @@
 
 <div class="divider"></div>
 
+<!-- PIPELINES -->
+<div class="pipeline-section" id="how-it-works">
+  <div class="reveal">
+    <p class="section-label">Under the Hood</p>
+    <h2 class="section-title">How the <span>AI Systems Work</span></h2>
+    <p class="section-desc">Animated walkthroughs of the core ML pipelines I designed and shipped — from raw data to measurable outcome.</p>
+  </div>
+
+  <!-- InCurate Pipeline -->
+  <div class="pipeline-wrap reveal" id="pipe-incurate">
+    <div class="pipeline-header">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;">
+        <span style="font-size:1.4rem;">🧬</span>
+        <div class="pipeline-title">InCurate — Clinical Data Extraction Pipeline</div>
+      </div>
+      <div class="pipeline-subtitle">Tata 1mg · Converts unstructured diagnostic reports into structured health-risk scores using multimodal LLMs</div>
+    </div>
+    <div class="pipeline-flow" id="flow-incurate">
+
+      <div class="pipeline-step" data-delay="0">
+        <div class="step-box">
+          <div class="step-icon">📄</div>
+          <div class="step-name">Raw Diagnostic Report</div>
+          <div class="step-desc">Unstructured PDFs, scanned images from labs</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="200"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step" data-delay="300">
+        <div class="step-box">
+          <div class="step-icon">🔍</div>
+          <div class="step-name">OCR & Pre-processing</div>
+          <div class="step-desc">Text extraction, layout parsing, image segmentation</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="500"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step" data-delay="600">
+        <div class="step-box">
+          <div class="step-icon">🤖</div>
+          <div class="step-name">Multimodal LLM</div>
+          <div class="step-desc">Gemini 1.5 Pro · LLaVA · Donut · Claude</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="800"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step" data-delay="900">
+        <div class="step-box">
+          <div class="step-icon">📊</div>
+          <div class="step-name">Structured Extraction</div>
+          <div class="step-desc">JSON health metrics, biomarker values, flags</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="1100"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step" data-delay="1200">
+        <div class="step-box">
+          <div class="step-icon">⚡</div>
+          <div class="step-name">Risk Scoring</div>
+          <div class="step-desc">Health risk output for corporate wellness clients</div>
+          <div class="step-result">+23% accuracy</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RecSys Pipeline -->
+  <div class="pipeline-wrap reveal" id="pipe-recsys">
+    <div class="pipeline-header">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;">
+        <span style="font-size:1.4rem;">🔁</span>
+        <div class="pipeline-title">RecSys — Candidate Generator Pipeline</div>
+      </div>
+      <div class="pipeline-subtitle">ShareChat · Post-post cosine similarity ANN system that replaced a costly personalisation layer</div>
+    </div>
+    <div class="pipeline-flow" id="flow-recsys">
+
+      <div class="pipeline-step purple-pipe" data-delay="0">
+        <div class="step-box">
+          <div class="step-icon">👤</div>
+          <div class="step-name">User Interaction</div>
+          <div class="step-desc">Last N watch, like, share signals from feed</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow purple-arrow" data-delay="200"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step purple-pipe" data-delay="300">
+        <div class="step-box">
+          <div class="step-icon">🧮</div>
+          <div class="step-name">Post Embeddings</div>
+          <div class="step-desc">Lifecycle-aware vectors, maturity-weighted signals</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow purple-arrow" data-delay="500"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step purple-pipe" data-delay="600">
+        <div class="step-box">
+          <div class="step-icon">🔎</div>
+          <div class="step-name">ANN Index Query</div>
+          <div class="step-desc">Hamsa ANN index, cosine similarity lookup</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow purple-arrow" data-delay="800"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step purple-pipe" data-delay="900">
+        <div class="step-box">
+          <div class="step-icon">📋</div>
+          <div class="step-name">Candidate Pool</div>
+          <div class="step-desc">Recall@100 evaluation, freshness re-ranking</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow purple-arrow" data-delay="1100"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+      <div class="pipeline-step purple-pipe" data-delay="1200">
+        <div class="step-box">
+          <div class="step-icon">🎯</div>
+          <div class="step-name">Ranked Feed</div>
+          <div class="step-desc">Personalised content served to user in real-time</div>
+          <div class="step-result">+0.4% retention · ₹8M/mo saved</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Search Pipeline -->
+  <div class="pipeline-wrap reveal" id="pipe-search">
+    <div class="pipeline-header">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;">
+        <span style="font-size:1.4rem;">🔍</span>
+        <div class="pipeline-title">Search — 2-Stage Ranking Pipeline</div>
+      </div>
+      <div class="pipeline-subtitle">ShareChat · From n-gram retrieval to engagement-aware ranking, improving MRR by 45%</div>
+    </div>
+    <div class="pipeline-flow" id="flow-search">
+
+      <div class="pipeline-step" style="--pipe-color: var(--green);" data-delay="0">
+        <div class="step-box" style="transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;">
+          <div class="step-icon">💬</div>
+          <div class="step-name">User Query</div>
+          <div class="step-desc">Multi-word, misspelled, multi-language queries</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="200"><div class="arrow-line" style="background:linear-gradient(90deg,var(--green),rgba(34,211,238,0.3))"></div><div class="arrow-head" style="border-left-color:var(--green)"></div></div>
+
+      <div class="pipeline-step" data-delay="300">
+        <div class="step-box">
+          <div class="step-icon">📝</div>
+          <div class="step-name">n-gram Retrieval</div>
+          <div class="step-desc">Elasticsearch n-gram index, partial + fuzzy match</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="500"><div class="arrow-line" style="background:linear-gradient(90deg,var(--green),rgba(34,211,238,0.3))"></div><div class="arrow-head" style="border-left-color:var(--green)"></div></div>
+
+      <div class="pipeline-step" data-delay="600">
+        <div class="step-box">
+          <div class="step-icon">🏆</div>
+          <div class="step-name">Stage 1 Ranker</div>
+          <div class="step-desc">Counter features: CTR, impressions, click counts</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="800"><div class="arrow-line" style="background:linear-gradient(90deg,var(--green),rgba(34,211,238,0.3))"></div><div class="arrow-head" style="border-left-color:var(--green)"></div></div>
+
+      <div class="pipeline-step" data-delay="900">
+        <div class="step-box">
+          <div class="step-icon">💡</div>
+          <div class="step-name">Stage 2 Ranker</div>
+          <div class="step-desc">Engagement: likes, shares, dwell time signals</div>
+        </div>
+      </div>
+
+      <div class="pipeline-arrow" data-delay="1100"><div class="arrow-line" style="background:linear-gradient(90deg,var(--green),rgba(34,211,238,0.3))"></div><div class="arrow-head" style="border-left-color:var(--green)"></div></div>
+
+      <div class="pipeline-step" data-delay="1200">
+        <div class="step-box">
+          <div class="step-icon">✅</div>
+          <div class="step-name">Ranked Results</div>
+          <div class="step-desc">Top-intent matches surfaced first</div>
+          <div class="step-result">MRR +45% · +16% searches</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
 <!-- SKILLS -->
 <div class="section-wrap" id="skills">
   <div class="reveal">
@@ -770,38 +1053,88 @@
 </footer>
 
 <script>
-  // Typewriter
-  const phrases = [
-    'AI Product Manager',
-    'ML Systems Thinker',
-    'GenAI Builder',
-    'Data-Driven PM',
-    'RecSys & Search PM',
-  ];
+  /* ── TYPEWRITER ─────────────────────────────────────────── */
+  const phrases = ['AI Product Manager','ML Systems Thinker','GenAI Builder','Data-Driven PM','RecSys & Search PM'];
   let pi = 0, ci = 0, deleting = false;
-  const el = document.getElementById('typewriter');
-
+  const twEl = document.getElementById('typewriter');
   function type() {
-    const current = phrases[pi];
-    if (!deleting) {
-      el.textContent = current.slice(0, ci + 1);
-      ci++;
-      if (ci === current.length) { deleting = true; setTimeout(type, 2000); return; }
-    } else {
-      el.textContent = current.slice(0, ci - 1);
-      ci--;
-      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
-    }
+    const cur = phrases[pi];
+    twEl.textContent = deleting ? cur.slice(0, ci - 1) : cur.slice(0, ci + 1);
+    deleting ? ci-- : ci++;
+    if (!deleting && ci === cur.length) { deleting = true; setTimeout(type, 2000); return; }
+    if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
     setTimeout(type, deleting ? 55 : 85);
   }
   type();
 
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
+  /* ── COUNT-UP ───────────────────────────────────────────── */
+  function animateCount(el) {
+    const target = +el.dataset.target;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    let startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const countEls = document.querySelectorAll('.stat-num[data-target]');
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.done) {
+        e.target.dataset.done = '1';
+        animateCount(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(el => countObserver.observe(el));
+
+  /* ── PIPELINE ANIMATIONS ────────────────────────────────── */
+  function animatePipeline(flowId) {
+    const flow = document.getElementById(flowId);
+    if (!flow) return;
+    const steps = flow.querySelectorAll('.pipeline-step');
+    const arrows = flow.querySelectorAll('.pipeline-arrow');
+    steps.forEach(step => {
+      const delay = parseInt(step.dataset.delay) || 0;
+      setTimeout(() => step.classList.add('lit'), delay);
+    });
+    arrows.forEach(arrow => {
+      const delay = parseInt(arrow.dataset.delay) || 0;
+      setTimeout(() => arrow.classList.add('lit'), delay);
+    });
+  }
+
+  const pipelineMap = {
+    'pipe-incurate': 'flow-incurate',
+    'pipe-recsys':   'flow-recsys',
+    'pipe-search':   'flow-search',
+  };
+  const pipeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.animated) {
+        e.target.dataset.animated = '1';
+        const flowId = pipelineMap[e.target.id];
+        if (flowId) animatePipeline(flowId);
+      }
+    });
+  }, { threshold: 0.3 });
+  Object.keys(pipelineMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) pipeObserver.observe(el);
+  });
+
+  /* ── SCROLL REVEAL ──────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
 </body>
