@@ -547,8 +547,8 @@
           <div class="stat-label">Corporate Healthcare Business</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num" data-target="37" data-suffix="M DAU scale">0</div>
-          <div class="stat-label">+0.4% Retention Lift</div>
+          <div class="stat-num" data-target="0.4" data-prefix="+" data-suffix="% Retention">0</div>
+          <div class="stat-label">at 37M DAU scale</div>
         </div>
         <div class="stat-card">
           <div class="stat-num" data-target="1" data-suffix=" paper">0</div>
@@ -1205,7 +1205,8 @@
       if (!startTime) startTime = ts;
       const progress = Math.min((ts - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = prefix + Math.floor(eased * target) + suffix;
+      const val = eased * target;
+      el.textContent = prefix + (Number.isInteger(target) ? Math.floor(val) : val.toFixed(1)) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
